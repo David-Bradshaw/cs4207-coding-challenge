@@ -1,0 +1,7 @@
+results*/
+*.parquet
+*.npy
+*.pkl
+run_log.txt
+venv/
+__pycache__/
