@@ -1,90 +1,68 @@
 # CS4207 Coding Challenge: Group 23, predict the payment method (card or cash)
 
 Given a yellow-taxi trip, predict whether it was paid by **card** (`payment_type` 1) or **cash** (`payment_type` 2).
-The positive class is **cash**, the minority (about 12% of card-or-cash trips), so we report precision, recall and F1 for cash, not only accuracy.
+Cash is the minority (about 12% of card-or-cash trips), so we report precision, recall and F1 for cash, not only accuracy.
 
 ## Files
 
 | File | What it does |
 |---|---|
-| `payment_method.py` | Main script: runs Parts 1 to 4 and saves the results |
+| `payment_method.ipynb` | **The solution notebook.** Runs everything, from cleaning to the final test, and keeps its outputs |
 | `payment_workers.py` | Functions that run in the worker processes (same idea as `workers.py` in Week 9) |
+| `requirements.txt` | Python packages needed |
+| `outputs/` | Small result files written by the notebook (charts, CSV tables, `summary.json`) and used for the poster |
+| `poster/` | A0 poster (PowerPoint and PDF) |
 
-## What the program does
+## What the notebook covers (rubric criteria)
 
-1. **Prepare (data parallelism).** Each worker process takes one monthly Parquet file. It keeps card and cash trips only and removes refunds, zero or impossible distances, and trips under 1 minute or over 3 hours. It then builds the features. The training months are split 85/15 into train and validation, using a seed that depends on the shard. `--compare-serial` also times a one-process run, so you can report the speed-up.
-2. **Encode.** Builds a smoothed cash rate for each pickup zone and each drop-off zone, computed from the **training rows only** to avoid data leakage. It then saves the X and y matrices.
-3. **Model search (task parallelism).** Six independent training jobs: three logistic regressions and three histogram gradient-boosting models, with and without class balancing. Each one is scored on the validation set, and its probability threshold is tuned for the best cash F1. The best model is chosen on validation F1.
-4. **Test.** The chosen model is scored **once** on a later month it has never seen. The output includes a confusion matrix, accuracy, precision, recall, F1 and ROC AUC, plus the "always guess card" baseline.
-
-Training on earlier months and testing on a later month follows the Week 8 advice: train on the past, predict the future.
+| Part | Criterion |
+|---|---|
+| 0 | Configuration in one place; Python, library versions, cores and RAM recorded (criterion 6) |
+| 1 | Footer inspection, column pruning, cleaning with stated thresholds, before/after row counts, Flex Fare nulls, spill-over pickups (criterion 1) |
+| 1–2 | **Data parallelism:** one shard per month, partial zone counts merged in a fixed order, checked against the sequential result (criterion 3) |
+| 3 | **Task parallelism #1, feature extraction:** 4 feature groups built as separate tasks and joined in a fixed column order (criterion 4) |
+| 4 | **Task parallelism #2, hyperparameter search:** 6 independent model settings, best chosen on validation (criterion 4) |
+| 5 | Sequential vs parallel: warm-up, 3 repeats, 1/2/4(/3/6) workers, speed-up and efficiency, chart, Amdahl's law, measured overheads, outputs checked equal (criterion 2) |
+| 6 | Non-determinism: unseeded sampling, and set/hash ordering, each shown differing and then fixed (criterion 5) |
+| 7–8 | Final test on April 2026 and a summary of every number used on the poster |
 
 ### Data leakage we avoid on purpose
-- **`tip_amount` and `total_amount` are not used.** Card tips are recorded automatically, but cash tips almost never are. In January 2026, only 24 of 314,043 cash trips had a tip above 0. A model given the tip would score close to 100% while learning nothing useful.
-- Zone cash rates use training rows only. Validation and test rows never feed into them.
-- `payment_type` 0 ("flex fare / unknown"), 3 (no charge) and 4 (dispute) are removed. Type 0 rows also have no passenger count, rate code or surcharges.
+- **`tip_amount` and `total_amount` are never read.** Card tips are recorded automatically, but cash tips almost never are, so a tip gives the answer away.
+- Zone cash rates use training rows only.
+- Time-based split: train and validate on January–March 2026, test on April 2026.
 
-## Running it on Rockhill (from a lab PC)
+## Running it on Rockhill
 
-Open **PowerShell** on the lab PC. This is the *Laptop window*.
+Log in from a lab PC (`ssh group23@rockhill.csis.ul.ie`), then:
 
-**1. Copy the project to Rockhill.** Run this from the folder that *contains* `cs4207-coding-challenge`:
 ```
-scp -r cs4207-coding-challenge group23@rockhill.csis.ul.ie:~/
-```
-
-**2. Log in.** Open a second PowerShell window. This is the *Rockhill window*:
-```
-ssh group23@rockhill.csis.ul.ie
-```
-Type the group password. Nothing appears while you type, which is normal. The starting password is printed in the class team list, which everyone can read, so change it with `passwd` and tell your team the new one.
-
-**3. Set up Python (first time only):**
-```
-python3 -m venv ~/venv
 source ~/venv/bin/activate
-pip install pandas pyarrow scikit-learn matplotlib
-```
-On later logins you only need `source ~/venv/bin/activate`.
-
-**4. Quick test.** Uses 5% of the rows and only two models, so it takes about a minute:
-```
 cd ~/cs4207-coding-challenge
-python payment_method.py --quick --sample 0.05 --out results_quick
+git fetch
+git reset --hard origin/main
+pip install -r requirements.txt
+jupyter nbconvert --to notebook --execute payment_method.ipynb --output payment_method.ipynb --ExecutePreprocessor.timeout=-1
 ```
 
-**5. Full run.** Trains on Jan to Mar 2026 and tests on Apr 2026. `tee` also saves the printout to a file for your report:
-```
-python payment_method.py --compare-serial 2>&1 | tee run_log.txt
-```
-Useful options: `--train 2026-01 2026-02 2026-03 2026-04 2026-05 --test 2026-06`, `--sample 0.5` and `--workers 8`.
-Rockhill is shared and often busy (`uptime` shows the load), so keep `--workers` modest.
+This takes about 10–15 minutes. The notebook is saved **with its outputs**, and the files in `outputs/` are updated.
+The first time only, create the virtual environment with `python3 -m venv ~/venv`.
 
-**6. Copy the results back** (in the Laptop window):
+To send the results back to GitHub (the password prompt needs a GitHub token, not your GitHub password):
+
 ```
-scp group23@rockhill.csis.ul.ie:~/cs4207-coding-challenge/results/metrics.json .
-scp group23@rockhill.csis.ul.ie:~/cs4207-coding-challenge/results/model_search.csv .
-scp group23@rockhill.csis.ul.ie:~/cs4207-coding-challenge/results/confusion_matrix.png .
-scp group23@rockhill.csis.ul.ie:~/cs4207-coding-challenge/run_log.txt .
+git add payment_method.ipynb outputs
+git commit -m "Notebook run on Rockhill"
+git push
 ```
 
-**7. Tidy up and log out.** `results/prepared` holds the large working matrices:
-```
-rm -rf ~/cs4207-coding-challenge/results/prepared ~/cs4207-coding-challenge/results/models
-deactivate
-exit
-```
+Then free the disk space: `rm -rf results`.
 
-## Outputs (in `results/`)
-- `metrics.json`: settings, data sizes, timings (serial vs parallel) and test metrics
-- `model_search.csv`: validation scores and time for every model setting
-- `logreg_weights.csv`: which features push a prediction towards cash or card
-- `confusion_matrix.png`: test-set confusion matrix
+To test on other machines, set `TAXI_DATA_DIR`, `TAXI_PATTERN` and `TAXI_SAMPLE` before starting Jupyter. The defaults are the Rockhill paths.
 
 ## Reproducibility
-- Monthly files are processed in sorted order.
-- Every shard has a fixed seed (`4207 + shard number`), and rows are sorted before sampling.
+- All settings and seeds are in the first code cell.
+- Each shard has a fixed seed (`4207 + shard number`), and rows are stable-sorted before sampling.
 - `pool.map` returns results in input order, whichever worker finishes first.
-- Models use `random_state=4207`.
-
-Running the same command twice gives the same numbers.
+- Feature groups are joined in a fixed order (`GROUP_ORDER`).
+- Each process uses one maths thread, and models use `random_state=4207`.
+- `outputs/environment.json` records the library versions, hardware and run time.
