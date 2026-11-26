@@ -249,7 +249,7 @@ def best_threshold(y, p):
     return best
 
 
-def train_one_setting(name, kind, params, prep_dir, models_dir=None, max_rows=None):
+def train_one_setting(name, kind, params, prep_dir, models_dir=None, max_rows=None, seed=4207):
     """TASK PARALLELISM (hyperparameter search): one complete training run for one setting.
 
     Fits on the training rows, scores on the VALIDATION rows and (optionally) saves the
@@ -265,7 +265,7 @@ def train_one_setting(name, kind, params, prep_dir, models_dir=None, max_rows=No
     Xv = np.load(f"{prep_dir}/val_X.npy", mmap_mode="r")
     yv = np.load(f"{prep_dir}/val_y.npy")
 
-    model = make_model(kind, params)
+    model = make_model(kind, params, seed)   # seed=None only in the non-determinism demo
     model.fit(np.asarray(X), y)
     p = model.predict_proba(np.asarray(Xv))[:, 1]
     f1_tuned, thr = best_threshold(yv, p)
