@@ -1,0 +1,19 @@
+{
+  "python": "3.12.3",
+  "numpy": "2.5.5",
+  "pandas": "3.1.1",
+  "pyarrow": "26.0.1",
+  "scikit-learn": "1.9.1",
+  "matplotlib": "3.11.2",
+  "host": "rockhill",
+  "os": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+  "cpu_count": 64,
+  "usable_cores": 64,
+  "ram_gb": 503.4,
+  "load_average_1_5_15min": [
+    125.70947265625,
+    126.392578125,
+    124.37109375
+  ],
+  "started": "2026-11-26 18:35:59"
+}

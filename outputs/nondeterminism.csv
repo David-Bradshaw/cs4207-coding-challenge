@@ -1,0 +1,13 @@
+source,run,output fingerprint,rows kept,"cash rate, pickup zone 132",column-group order
+unseeded sampling (2024-01),"no seed, run 1",995928138f1c,135633.0,0.242984,
+unseeded sampling (2024-01),"no seed, run 2",20c17727a34a,135633.0,0.236407,
+unseeded sampling (2024-01),"seed 4207, run 1",06164b3daa06,135633.0,0.238975,
+unseeded sampling (2024-01),"seed 4207, run 2",06164b3daa06,135633.0,0.238975,
+set ordering of feature groups,"set() order, run 1",475c7782991d,,,flags | trip | zones | time
+set ordering of feature groups,"set() order, run 2",84f27db27b20,,,zones | trip | time | flags
+set ordering of feature groups,"set() order, run 3",6adb9efe0b13,,,trip | time | flags | zones
+set ordering of feature groups,"set() order, run 4",4aa696cfce2e,,,trip | time | zones | flags
+set ordering of feature groups,"fixed GROUP_ORDER, run 1",6adb9efe0b13,,,trip | time | flags | zones
+set ordering of feature groups,"fixed GROUP_ORDER, run 2",6adb9efe0b13,,,trip | time | flags | zones
+set ordering of feature groups,"fixed GROUP_ORDER, run 3",6adb9efe0b13,,,trip | time | flags | zones
+set ordering of feature groups,"fixed GROUP_ORDER, run 4",6adb9efe0b13,,,trip | time | flags | zones
