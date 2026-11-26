@@ -22,14 +22,14 @@ Cash is the minority (about 12% of card-or-cash trips), so we report precision, 
 | 1–2 | **Data parallelism:** one shard per month, partial zone counts merged in a fixed order, checked against the sequential result (criterion 3) |
 | 3 | **Task parallelism #1, feature extraction:** 4 feature groups built as separate tasks and joined in a fixed column order (criterion 4) |
 | 4 | **Task parallelism #2, hyperparameter search:** 6 independent model settings, best chosen on validation (criterion 4) |
-| 5 | Sequential vs parallel: warm-up, 3 repeats, 1/2/4(/3/6) workers, speed-up and efficiency, chart, Amdahl's law, measured overheads, outputs checked equal (criterion 2) |
+| 5 | Sequential vs parallel: warm-up, 3 repeats, 1/2/4/8 workers (search: 1/2/3/6), speed-up and efficiency, chart, Amdahl's law, measured overheads, outputs checked equal (criterion 2) |
 | 6 | Non-determinism: unseeded sampling, and set/hash ordering, each shown differing and then fixed (criterion 5) |
-| 7–8 | Final test on April 2026 and a summary of every number used on the poster |
+| 7–8 | Final test on all of 2026, scores per month, cash-share trend 2024–2026, and a summary of every number used on the poster |
 
 ### Data leakage we avoid on purpose
 - **`tip_amount` and `total_amount` are never read.** Card tips are recorded automatically, but cash tips almost never are, so a tip gives the answer away.
 - Zone cash rates use training rows only.
-- Time-based split: train and validate on January–March 2026, test on April 2026.
+- Time-based split: train on January 2024 – September 2025 (a seeded 5% sample of each month), choose the model on the validation window October – December 2025, and test once on all of 2026 (January – September, in full).
 
 ## Running it on Rockhill
 
@@ -44,7 +44,7 @@ pip install -r requirements.txt
 jupyter nbconvert --to notebook --execute payment_method.ipynb --output payment_method.ipynb --ExecutePreprocessor.timeout=-1
 ```
 
-This takes about 10–15 minutes. The notebook is saved **with its outputs**, and the files in `outputs/` are updated.
+This takes about 15–20 minutes. Rockhill is shared, so it can take longer when the server is busy. The notebook is saved **with its outputs**, and the files in `outputs/` are updated.
 The first time only, create the virtual environment with `python3 -m venv ~/venv`.
 
 To send the results back to GitHub (the password prompt needs a GitHub token, not your GitHub password):

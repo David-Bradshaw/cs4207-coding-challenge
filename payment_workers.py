@@ -81,14 +81,14 @@ def read_month(path):
     return t
 
 
-def clean_month(path, month, out_path, role, sample_frac=1.0, val_frac=0.15, seed=4207):
+def clean_month(path, month, out_path, role, sample_frac=1.0, seed=4207):
     """DATA PARALLELISM: the same cleaning function is applied to every monthly file (shard).
 
-    role is "train" (rows are sampled and split into train/validation) or "test"
-    (every row is kept for the final evaluation). seed=None means unseeded (used only
+    role is "train", "val" (the validation window) or "test". Training and validation
+    months are sampled (sample_frac); test months are normally kept in full. seed=None means unseeded (used only
     in the non-determinism demonstration). Writes the cleaned rows to out_path and
     returns small partial results that the main process combines:
-    row counts per cleaning step, and per-zone trip/cash counts from TRAINING rows only.
+    row counts per cleaning step, and per-zone trip/cash counts (training months only).
     """
     start = time.perf_counter()
     t = read_month(path)
@@ -128,10 +128,9 @@ def clean_month(path, month, out_path, role, sample_frac=1.0, val_frac=0.15, see
                       kind="stable").reset_index(drop=True)   # fixed row order inside the shard
 
     rng = np.random.default_rng(seed)
-    if role == "train" and sample_frac < 1.0:
+    if sample_frac < 1.0:
         t = t.iloc[np.sort(rng.permutation(len(t))[:int(sample_frac * len(t))])]
-    split = (np.where(rng.random(len(t)) < val_frac, VAL, TRAIN) if role == "train"
-             else np.full(len(t), TEST))
+    split = np.full(len(t), {"train": TRAIN, "val": VAL, "test": TEST}[role])
 
     out = t.drop(columns=["payment_type", "tpep_dropoff_datetime"]).assign(
         split=split.astype("int8"), cash=(t.payment_type == CASH).astype("int8").values)
@@ -146,7 +145,6 @@ def clean_month(path, month, out_path, role, sample_frac=1.0, val_frac=0.15, see
         # partial results (counts) for the zone cash rates; training rows only
         "pu_n": tr.groupby("PULocationID").size(), "pu_cash": tr.groupby("PULocationID").cash.sum(),
         "do_n": tr.groupby("DOLocationID").size(), "do_cash": tr.groupby("DOLocationID").cash.sum(),
-        "train_rows": int((out.split == TRAIN).sum()), "val_rows": int((out.split == VAL).sum()),
         "md5": digest(out), "seconds": time.perf_counter() - start,
     }
 
@@ -214,14 +212,14 @@ def build_feature_group(group, clean_paths, out_path, zone_tables=None):
             "pid": os.getpid()}
 
 
-def assemble_features(group_files, naive=False):
+def assemble_features(group_files, naive=False, rows=None):
     """Join the feature groups side by side into one matrix.
 
     naive=True reproduces a bug we are demonstrating: looping over a *set* of group
     names, whose order depends on Python's per-run string hashing.
     """
     order = list(set(group_files)) if naive else GROUP_ORDER
-    X = np.hstack([np.load(group_files[g]) for g in order])
+    X = np.hstack([np.load(group_files[g], mmap_mode="r")[:rows] for g in order])
     columns = [c for g in order for c in GROUP_COLUMNS[g]]
     return columns, X
 
