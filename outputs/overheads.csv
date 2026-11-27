@@ -1,11 +1,11 @@
 overhead,value
-"pool start-up, 2 workers",0.08 s
-"pool start-up, 3 workers",0.10 s
-"pool start-up, 4 workers",0.14 s
-"pool start-up, 6 workers",0.20 s
-"pool start-up, 8 workers",0.25 s
-cleaning: slowest shard / average shard,1.18x
-features: slowest task / average task,1.37x
-search: slowest model / average model,2.39x
+"pool start-up, 2 workers",0.13 s
+"pool start-up, 3 workers",0.17 s
+"pool start-up, 4 workers",0.23 s
+"pool start-up, 6 workers",0.35 s
+"pool start-up, 8 workers",0.41 s
+cleaning: slowest shard / average shard,1.33x
+features: slowest task / average task,1.42x
+search: slowest model / average model,2.41x
 search: slowest model share of all model time,40%
-cleaning: partial results sent back to main process,378 KB
+cleaning: partial results sent back to main process,397 KB

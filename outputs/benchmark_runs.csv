@@ -1,34 +1,34 @@
 stage,workers,repeat,seconds,same_output_as_1_worker
-cleaning (data parallel),1,1,22.88568099355325,True
-cleaning (data parallel),1,2,23.626378683373332,True
-cleaning (data parallel),1,3,27.975240875966847,True
-cleaning (data parallel),2,1,14.927917927969247,True
-cleaning (data parallel),2,2,13.536524923983961,True
-cleaning (data parallel),2,3,11.608102306257933,True
-cleaning (data parallel),4,1,7.499518733937293,True
-cleaning (data parallel),4,2,6.317635751795024,True
-cleaning (data parallel),4,3,6.834271891973913,True
-cleaning (data parallel),8,1,4.426939867902547,True
-cleaning (data parallel),8,2,4.157229275908321,True
-cleaning (data parallel),8,3,3.930941662751138,True
-feature extraction (task parallel),1,1,17.084769257809967,True
-feature extraction (task parallel),1,2,17.28269359609112,True
-feature extraction (task parallel),1,3,17.008504115976393,True
-feature extraction (task parallel),2,1,10.893284942023456,True
-feature extraction (task parallel),2,2,10.759272907860577,True
-feature extraction (task parallel),2,3,11.11700312467292,True
-feature extraction (task parallel),4,1,6.638730221893638,True
-feature extraction (task parallel),4,2,7.246959823649377,True
-feature extraction (task parallel),4,3,7.033056660089642,True
-model search (task parallel),1,1,36.96540237404406,True
-model search (task parallel),1,2,37.07796988077462,True
-model search (task parallel),1,3,34.78425257699564,True
-model search (task parallel),2,1,25.876840976066887,True
-model search (task parallel),2,2,24.051650820765644,True
-model search (task parallel),2,3,25.589077633805573,True
-model search (task parallel),3,1,16.15099903428927,True
-model search (task parallel),3,2,16.287912415806204,True
-model search (task parallel),3,3,15.837608188390732,True
-model search (task parallel),6,1,15.425029420759529,True
-model search (task parallel),6,2,16.632974987849593,True
-model search (task parallel),6,3,16.82130112638697,True
+cleaning (data parallel),1,1,36.084889532998204,True
+cleaning (data parallel),1,2,36.81914060423151,True
+cleaning (data parallel),1,3,37.458035367075354,True
+cleaning (data parallel),2,1,20.531287941150367,True
+cleaning (data parallel),2,2,20.188846913166344,True
+cleaning (data parallel),2,3,20.263756080996245,True
+cleaning (data parallel),4,1,11.033243878278881,True
+cleaning (data parallel),4,2,10.958038580138236,True
+cleaning (data parallel),4,3,8.412789952009916,True
+cleaning (data parallel),8,1,5.7055037948302925,True
+cleaning (data parallel),8,2,5.449336685240269,True
+cleaning (data parallel),8,3,5.848199156112969,True
+feature extraction (task parallel),1,1,60.65526686795056,True
+feature extraction (task parallel),1,2,60.68806351069361,True
+feature extraction (task parallel),1,3,60.20047081122175,True
+feature extraction (task parallel),2,1,37.022810076829046,True
+feature extraction (task parallel),2,2,35.83052923390642,True
+feature extraction (task parallel),2,3,36.683200537227094,True
+feature extraction (task parallel),4,1,32.32909998903051,True
+feature extraction (task parallel),4,2,28.149915426038206,True
+feature extraction (task parallel),4,3,23.84351038420573,True
+model search (task parallel),1,1,244.84625801676884,True
+model search (task parallel),1,2,244.15368351899087,True
+model search (task parallel),1,3,244.08926572510973,True
+model search (task parallel),2,1,150.00846538087353,True
+model search (task parallel),2,2,145.32989955320954,True
+model search (task parallel),2,3,144.776543376036,True
+model search (task parallel),3,1,96.29766208212823,True
+model search (task parallel),3,2,97.46763137541711,True
+model search (task parallel),3,3,96.10363952303305,True
+model search (task parallel),6,1,89.59087444702163,True
+model search (task parallel),6,2,89.63296829117462,True
+model search (task parallel),6,3,90.16505096573383,True

@@ -12,11 +12,11 @@
     "usable_cores": 64,
     "ram_gb": 503.4,
     "load_average_1_5_15min": [
-      125.70947265625,
-      126.392578125,
-      124.37109375
+      127.8642578125,
+      126.59228515625,
+      125.78564453125
     ],
-    "started": "2026-11-26 18:35:59"
+    "started": "2026-11-26 19:58:46"
   },
   "config": {
     "train": [
@@ -58,11 +58,13 @@
       "2026-08",
       "2026-09"
     ],
-    "sample": 0.05,
+    "sample": 1.0,
     "test_sample": 1.0,
     "seed": 4207,
     "repeats": 3,
-    "bench_rows": 200000
+    "bench_rows": 200000,
+    "search_workers": 3,
+    "demo_rows": 1000000
   },
   "cleaning": {
     "rows in file": 123471721,
@@ -73,16 +75,16 @@
     "distance <= 0 or >= 100 miles": 977379,
     "duration < 1 or > 180 min": 1248526,
     "rows after cleaning": 93367537,
-    "rows used (after sampling)": 26991705
+    "rows used (after sampling)": 93367537
   },
   "sizes": {
     "train": {
-      "trips": 3040336,
-      "cash_share": 0.1386198762242068
+      "trips": 60806933,
+      "cash_share": 0.13841525274757732
     },
     "val": {
-      "trips": 453116,
-      "cash_share": 0.1188172565082672
+      "trips": 9062351,
+      "cash_share": 0.11868851692016785
     },
     "test": {
       "trips": 23498253,
@@ -98,8 +100,8 @@
     {
       "stage": "cleaning (data parallel)",
       "workers": 1,
-      "mean_s": 24.82910018429781,
-      "std_s": 2.7496925656803883,
+      "mean_s": 36.78735516810169,
+      "std_s": 0.6871245199185733,
       "speedup": 1.0,
       "efficiency": 1.0,
       "amdahl_p": NaN,
@@ -108,38 +110,38 @@
     {
       "stage": "cleaning (data parallel)",
       "workers": 2,
-      "mean_s": 13.357515052737048,
-      "std_s": 1.6671314708332083,
-      "speedup": 1.8588113197903644,
-      "efficiency": 0.9294056598951822,
-      "amdahl_p": 0.9240435655268342,
+      "mean_s": 20.32796364510432,
+      "std_s": 0.18002339536351358,
+      "speedup": 1.8096920975634156,
+      "efficiency": 0.9048460487817078,
+      "amdahl_p": 0.8948396234404645,
       "outputs_match": true
     },
     {
       "stage": "cleaning (data parallel)",
       "workers": 4,
-      "mean_s": 6.883808792568743,
-      "std_s": 0.5924966449354653,
-      "speedup": 3.6068840568467695,
-      "efficiency": 0.9017210142116924,
-      "amdahl_p": 0.9636698475325263,
+      "mean_s": 10.134690803475678,
+      "std_s": 1.4916839028178832,
+      "speedup": 3.629844844944408,
+      "efficiency": 0.907461211236102,
+      "amdahl_p": 0.9660081747413954,
       "outputs_match": true
     },
     {
       "stage": "cleaning (data parallel)",
       "workers": 8,
-      "mean_s": 4.1717036021873355,
-      "std_s": 0.2483156951730565,
-      "speedup": 5.951789137483126,
-      "efficiency": 0.7439736421853907,
-      "amdahl_p": 0.9508380513776301,
+      "mean_s": 5.667679878727843,
+      "std_s": 0.20210344910382588,
+      "speedup": 6.490725650574131,
+      "efficiency": 0.8113407063217664,
+      "amdahl_p": 0.9667817385984445,
       "outputs_match": true
     },
     {
       "stage": "feature extraction (task parallel)",
       "workers": 1,
-      "mean_s": 17.125322323292494,
-      "std_s": 0.14152166297573962,
+      "mean_s": 60.51460039662197,
+      "std_s": 0.2725379831538921,
       "speedup": 1.0,
       "efficiency": 1.0,
       "amdahl_p": NaN,
@@ -148,28 +150,28 @@
     {
       "stage": "feature extraction (task parallel)",
       "workers": 2,
-      "mean_s": 10.923186991518984,
-      "std_s": 0.180729982095324,
-      "speedup": 1.567795400425626,
-      "efficiency": 0.783897700212813,
-      "amdahl_p": 0.724323339986175,
+      "mean_s": 36.51217994932085,
+      "std_s": 0.6142633256315408,
+      "speedup": 1.6573811939088994,
+      "efficiency": 0.8286905969544497,
+      "amdahl_p": 0.7932770038961037,
       "outputs_match": true
     },
     {
       "stage": "feature extraction (task parallel)",
       "workers": 4,
-      "mean_s": 6.972915568544219,
-      "std_s": 0.3085425826076397,
-      "speedup": 2.455977296003293,
-      "efficiency": 0.6139943240008232,
-      "amdahl_p": 0.7904401496287777,
+      "mean_s": 28.107508599758148,
+      "std_s": 4.242953745866664,
+      "speedup": 2.152969203294762,
+      "efficiency": 0.5382423008236905,
+      "amdahl_p": 0.7140335629079654,
       "outputs_match": true
     },
     {
       "stage": "model search (task parallel)",
       "workers": 1,
-      "mean_s": 36.275874943938106,
-      "std_s": 1.2930084396728296,
+      "mean_s": 244.36306908695647,
+      "std_s": 0.41969163615926414,
       "speedup": 1.0,
       "efficiency": 1.0,
       "amdahl_p": NaN,
@@ -178,66 +180,66 @@
     {
       "stage": "model search (task parallel)",
       "workers": 2,
-      "mean_s": 25.172523143546034,
-      "std_s": 0.9813093336296571,
-      "speedup": 1.4410901417023367,
-      "efficiency": 0.7205450708511684,
-      "amdahl_p": 0.6121617641229355,
+      "mean_s": 146.70496943670636,
+      "std_s": 2.8742590096494043,
+      "speedup": 1.6656768344332278,
+      "efficiency": 0.8328384172166139,
+      "amdahl_p": 0.7992868972806897,
       "outputs_match": true
     },
     {
       "stage": "model search (task parallel)",
       "workers": 3,
-      "mean_s": 16.092173212828737,
-      "std_s": 0.23084373991932597,
-      "speedup": 2.2542558089679803,
-      "efficiency": 0.7514186029893267,
-      "amdahl_p": 0.8345919331636482,
+      "mean_s": 96.6229776601928,
+      "std_s": 0.7378964103050913,
+      "speedup": 2.5290368295866577,
+      "efficiency": 0.8430122765288859,
+      "amdahl_p": 0.9068888272199823,
       "outputs_match": true
     },
     {
       "stage": "model search (task parallel)",
       "workers": 6,
-      "mean_s": 16.2931018449987,
-      "std_s": 0.7576470048165241,
-      "speedup": 2.226456035753148,
-      "efficiency": 0.37107600595885804,
-      "amdahl_p": 0.6610268602972557,
+      "mean_s": 89.79629790131003,
+      "std_s": 0.32004232504522134,
+      "speedup": 2.72130449470781,
+      "efficiency": 0.4535507491179684,
+      "amdahl_p": 0.7590350134159296,
       "outputs_match": true
     }
   ],
   "overheads": [
     {
       "overhead": "pool start-up, 2 workers",
-      "value": "0.08 s"
+      "value": "0.13 s"
     },
     {
       "overhead": "pool start-up, 3 workers",
-      "value": "0.10 s"
+      "value": "0.17 s"
     },
     {
       "overhead": "pool start-up, 4 workers",
-      "value": "0.14 s"
+      "value": "0.23 s"
     },
     {
       "overhead": "pool start-up, 6 workers",
-      "value": "0.20 s"
+      "value": "0.35 s"
     },
     {
       "overhead": "pool start-up, 8 workers",
-      "value": "0.25 s"
+      "value": "0.41 s"
     },
     {
       "overhead": "cleaning: slowest shard / average shard",
-      "value": "1.18x"
+      "value": "1.33x"
     },
     {
       "overhead": "features: slowest task / average task",
-      "value": "1.37x"
+      "value": "1.42x"
     },
     {
       "overhead": "search: slowest model / average model",
-      "value": "2.39x"
+      "value": "2.41x"
     },
     {
       "overhead": "search: slowest model share of all model time",
@@ -245,7 +247,7 @@
     },
     {
       "overhead": "cleaning: partial results sent back to main process",
-      "value": "378 KB"
+      "value": "397 KB"
     }
   ],
   "best_model": "hgb_200x63_bal",
@@ -253,274 +255,274 @@
     {
       "name": "logreg_C1",
       "kind": "logreg",
-      "val_auc": 0.6522276288653841,
-      "val_f1_at_0.5": 0.07112729054728109,
-      "val_f1_tuned": 0.26861855410828994,
+      "val_auc": 0.6538412610341506,
+      "val_f1_at_0.5": 0.0725866865036749,
+      "val_f1_tuned": 0.26927842478151925,
       "threshold": 0.14,
-      "seconds": 3.506334947887808,
-      "pid": 2619665
+      "seconds": 80.85756612382829,
+      "pid": 2691817
     },
     {
       "name": "logreg_C1_bal",
       "kind": "logreg",
-      "val_auc": 0.6522212045358984,
-      "val_f1_at_0.5": 0.2686215873371678,
-      "val_f1_tuned": 0.2686215873371678,
-      "threshold": 0.5,
-      "seconds": 6.288198065944016,
-      "pid": 2619683
+      "val_auc": 0.6539542306105792,
+      "val_f1_at_0.5": 0.2691339557685816,
+      "val_f1_tuned": 0.2694007884919932,
+      "threshold": 0.51,
+      "seconds": 93.73401879705489,
+      "pid": 2691818
     },
     {
       "name": "logreg_C0.01_bal",
       "kind": "logreg",
-      "val_auc": 0.652199074245615,
-      "val_f1_at_0.5": 0.2686437915155467,
-      "val_f1_tuned": 0.2686437915155467,
-      "threshold": 0.5,
-      "seconds": 5.929836749099195,
-      "pid": 2619718
+      "val_auc": 0.6539541329169989,
+      "val_f1_at_0.5": 0.26914506425965873,
+      "val_f1_tuned": 0.26941139076291526,
+      "threshold": 0.51,
+      "seconds": 100.82783514726907,
+      "pid": 2691819
     },
     {
       "name": "hgb_100x31",
       "kind": "hgb",
-      "val_auc": 0.6694627920935087,
-      "val_f1_at_0.5": 0.07797168488926269,
-      "val_f1_tuned": 0.2835971079199014,
-      "threshold": 0.16,
-      "seconds": 73.77491215337068,
-      "pid": 2619788
+      "val_auc": 0.6722713377557268,
+      "val_f1_at_0.5": 0.08159470318008245,
+      "val_f1_tuned": 0.2854205966870002,
+      "threshold": 0.15,
+      "seconds": 1387.57758644782,
+      "pid": 2691817
     },
     {
       "name": "hgb_200x63",
       "kind": "hgb",
-      "val_auc": 0.6742084874013375,
-      "val_f1_at_0.5": 0.08374203682694825,
-      "val_f1_tuned": 0.28837871839076634,
+      "val_auc": 0.6788621359670588,
+      "val_f1_at_0.5": 0.09003291346674629,
+      "val_f1_tuned": 0.29229060194019296,
       "threshold": 0.16,
-      "seconds": 147.18215662799776,
-      "pid": 2619789
+      "seconds": 2678.7927126642317,
+      "pid": 2691818
     },
     {
       "name": "hgb_200x63_bal",
       "kind": "hgb",
-      "val_auc": 0.6743464141843228,
-      "val_f1_at_0.5": 0.28472805859046707,
-      "val_f1_tuned": 0.289107970067704,
+      "val_auc": 0.6792760097547045,
+      "val_f1_at_0.5": 0.28811737010895455,
+      "val_f1_tuned": 0.29268388744603807,
       "threshold": 0.54,
-      "seconds": 132.9929816001095,
-      "pid": 2619790
+      "seconds": 2918.626894504763,
+      "pid": 2691819
     }
   ],
   "test": {
     "model": "hgb_200x63_bal",
     "threshold": 0.54,
     "test_trips": 23498253,
-    "accuracy": 0.768734296970928,
-    "precision_cash": 0.23759425605822096,
-    "recall_cash": 0.4169631605273437,
-    "f1_cash": 0.3027024044611936,
-    "f1_macro": 0.582041079728985,
-    "roc_auc": 0.6850693406934822,
+    "accuracy": 0.7681711912796241,
+    "precision_cash": 0.23869384692296255,
+    "recall_cash": 0.4227919381949489,
+    "f1_cash": 0.3051247251149288,
+    "f1_macro": 0.583001484013201,
+    "roc_auc": 0.6867057445472876,
     "baseline_always_card_accuracy": 0.8796125397066752,
-    "tn": 16884368,
-    "fp": 3784990,
-    "fn": 1649350,
-    "tp": 1179545
+    "tn": 16854647,
+    "fp": 3814711,
+    "fn": 1632861,
+    "tp": 1196034
   },
   "test_by_month": [
     {
       "month": "2026-01",
       "trips": 2476047,
       "cash_share": 0.11692306325364583,
-      "roc_auc": 0.6858648319674276,
-      "f1_cash": 0.2969839180730635,
-      "recall_cash": 0.41815914641096763
+      "roc_auc": 0.6893757983527402,
+      "f1_cash": 0.3005785156326475,
+      "recall_cash": 0.4242591716262474
     },
     {
       "month": "2026-02",
       "trips": 2247782,
       "cash_share": 0.11244017435854545,
-      "roc_auc": 0.6910479842198074,
-      "f1_cash": 0.2956717429314802,
-      "recall_cash": 0.4195085087104981
+      "roc_auc": 0.6948015269226966,
+      "f1_cash": 0.2998704708267189,
+      "recall_cash": 0.4263930268535774
     },
     {
       "month": "2026-03",
       "trips": 2869646,
       "cash_share": 0.11493891581052158,
-      "roc_auc": 0.6902119460521738,
-      "f1_cash": 0.29600791759114636,
-      "recall_cash": 0.4030663909724286
+      "roc_auc": 0.6937831807185211,
+      "f1_cash": 0.2999984432647851,
+      "recall_cash": 0.4089845194855594
     },
     {
       "month": "2026-04",
       "trips": 2905239,
       "cash_share": 0.1167029631641321,
-      "roc_auc": 0.6893483030878556,
-      "f1_cash": 0.29829914419644776,
-      "recall_cash": 0.40916384014157203
+      "roc_auc": 0.6928917019902536,
+      "f1_cash": 0.30139860666055385,
+      "recall_cash": 0.41348768618197906
     },
     {
       "month": "2026-05",
       "trips": 3003473,
       "cash_share": 0.11631334791423129,
-      "roc_auc": 0.6823053559259167,
-      "f1_cash": 0.29254626940768325,
-      "recall_cash": 0.4044380324264908
+      "roc_auc": 0.6858023471757477,
+      "f1_cash": 0.2959631244961657,
+      "recall_cash": 0.40986534762297333
     },
     {
       "month": "2026-06",
       "trips": 2695130,
       "cash_share": 0.12414354780659931,
-      "roc_auc": 0.6667747794677038,
-      "f1_cash": 0.2965644073206372,
-      "recall_cash": 0.4082275548966923
+      "roc_auc": 0.670236357363327,
+      "f1_cash": 0.30004286419410986,
+      "recall_cash": 0.4142380216568086
     },
     {
       "month": "2026-07",
       "trips": 2440890,
       "cash_share": 0.1328544096620495,
-      "roc_auc": 0.6829077424333857,
-      "f1_cash": 0.3204067063672172,
-      "recall_cash": 0.4332080312566493
+      "roc_auc": 0.6821340735589613,
+      "f1_cash": 0.321448486832451,
+      "recall_cash": 0.4390732785869133
     },
     {
       "month": "2026-08",
       "trips": 2298299,
       "cash_share": 0.13458518669677008,
-      "roc_auc": 0.6895236660228626,
-      "f1_cash": 0.3275257478420999,
-      "recall_cash": 0.4413174833584963
+      "roc_auc": 0.6863429518097048,
+      "f1_cash": 0.3270328849116774,
+      "recall_cash": 0.4470720975568753
     },
     {
       "month": "2026-09",
       "trips": 2561747,
       "cash_share": 0.11719970785561572,
-      "roc_auc": 0.6864862653166761,
-      "f1_cash": 0.3015773036872407,
-      "recall_cash": 0.41941339479609374
+      "roc_auc": 0.6828285469188327,
+      "f1_cash": 0.30058766640853685,
+      "recall_cash": 0.42599488402456737
     }
   ],
   "cash_share_by_month": [
     {
       "month": "2024-01",
       "role": "train",
-      "cash_share": 0.15513186318963673
+      "cash_share": 0.15457124267095274
     },
     {
       "month": "2024-02",
       "role": "train",
-      "cash_share": 0.14447297357120722
+      "cash_share": 0.1450885734217389
     },
     {
       "month": "2024-03",
       "role": "train",
-      "cash_share": 0.15097584042644657
+      "cash_share": 0.1501276757848539
     },
     {
       "month": "2024-04",
       "role": "train",
-      "cash_share": 0.1485741930281936
+      "cash_share": 0.15007443148356006
     },
     {
       "month": "2024-05",
       "role": "train",
-      "cash_share": 0.15104140432176497
+      "cash_share": 0.15014050063938336
     },
     {
       "month": "2024-06",
       "role": "train",
-      "cash_share": 0.14940004285408184
+      "cash_share": 0.148935578974998
     },
     {
       "month": "2024-07",
       "role": "train",
-      "cash_share": 0.16144068434765585
+      "cash_share": 0.16177016526492313
     },
     {
       "month": "2024-08",
       "role": "train",
-      "cash_share": 0.1643141006198331
+      "cash_share": 0.16479498908879373
     },
     {
       "month": "2024-09",
       "role": "train",
-      "cash_share": 0.1396711497731722
+      "cash_share": 0.13985380206823106
     },
     {
       "month": "2024-10",
       "role": "train",
-      "cash_share": 0.13648589173064699
+      "cash_share": 0.13727932906254584
     },
     {
       "month": "2024-11",
       "role": "train",
-      "cash_share": 0.13700355327666083
+      "cash_share": 0.13561399405519953
     },
     {
       "month": "2024-12",
       "role": "train",
-      "cash_share": 0.1463695492622681
+      "cash_share": 0.14519727774085264
     },
     {
       "month": "2025-01",
       "role": "train",
-      "cash_share": 0.13194803701787663
+      "cash_share": 0.13102315009245452
     },
     {
       "month": "2025-02",
       "role": "train",
-      "cash_share": 0.12122805814068704
+      "cash_share": 0.12013870469117284
     },
     {
       "month": "2025-03",
       "role": "train",
-      "cash_share": 0.12324566031762782
+      "cash_share": 0.12346257112123404
     },
     {
       "month": "2025-04",
       "role": "train",
-      "cash_share": 0.12540714447147663
+      "cash_share": 0.12611353827899488
     },
     {
       "month": "2025-05",
       "role": "train",
-      "cash_share": 0.12139579349904397
+      "cash_share": 0.12097149405419737
     },
     {
       "month": "2025-06",
       "role": "train",
-      "cash_share": 0.1219075589119642
+      "cash_share": 0.12184608499710686
     },
     {
       "month": "2025-07",
       "role": "train",
-      "cash_share": 0.13354049122378397
+      "cash_share": 0.13253753449967362
     },
     {
       "month": "2025-08",
       "role": "train",
-      "cash_share": 0.13605003914405012
+      "cash_share": 0.13670588676623374
     },
     {
       "month": "2025-09",
       "role": "train",
-      "cash_share": 0.11490139136006981
+      "cash_share": 0.11412097616974921
     },
     {
       "month": "2025-10",
       "role": "val",
-      "cash_share": 0.11294660489376775
+      "cash_share": 0.11370293828065271
     },
     {
       "month": "2025-11",
       "role": "val",
-      "cash_share": 0.11737722611980572
+      "cash_share": 0.11582830826476777
     },
     {
       "month": "2025-12",
       "role": "val",
-      "cash_share": 0.1267275241285849
+      "cash_share": 0.1270758594596454
     },
     {
       "month": "2026-01",
@@ -569,114 +571,114 @@
     }
   ],
   "top_weights": {
-    "rate_unknown": -1.1265339851379395,
-    "fare_amount": -0.24210654199123383,
-    "hour_cos": -0.16448256373405457,
-    "has_congestion_fee": -0.10824285447597504,
-    "has_cbd_fee": -0.0919816866517067,
-    "passenger_count": 0.10647502541542053,
-    "fare_per_mile": 0.12276242673397064,
-    "pu_zone_cash_rate": 0.18668495118618011,
-    "trip_distance": 0.20421744883060455,
-    "do_zone_cash_rate": 0.3139767348766327
+    "rate_unknown": -1.191852331161499,
+    "fare_amount": -0.2594069838523865,
+    "hour_cos": -0.16081124544143677,
+    "has_congestion_fee": -0.10114745050668716,
+    "has_cbd_fee": -0.0918591096997261,
+    "passenger_count": 0.10456708073616028,
+    "fare_per_mile": 0.1194358840584755,
+    "pu_zone_cash_rate": 0.1878742128610611,
+    "trip_distance": 0.2137131690979004,
+    "do_zone_cash_rate": 0.32236242294311523
   },
   "nondeterminism": [
     {
-      "source": "unseeded sampling (2024-01)",
+      "source": "unseeded model (boosted-tree bin edges)",
       "run": "no seed, run 1",
-      "output fingerprint": "995928138f1c",
-      "rows kept": "135633.0",
-      "cash rate, pickup zone 132": "0.242984",
-      "column-group order": NaN
+      "validation AUC": "0.6662544351",
+      "tuned threshold": "0.20",
+      "column-group order": NaN,
+      "output fingerprint": NaN
     },
     {
-      "source": "unseeded sampling (2024-01)",
+      "source": "unseeded model (boosted-tree bin edges)",
       "run": "no seed, run 2",
-      "output fingerprint": "20c17727a34a",
-      "rows kept": "135633.0",
-      "cash rate, pickup zone 132": "0.236407",
-      "column-group order": NaN
+      "validation AUC": "0.6659308970",
+      "tuned threshold": "0.20",
+      "column-group order": NaN,
+      "output fingerprint": NaN
     },
     {
-      "source": "unseeded sampling (2024-01)",
+      "source": "unseeded model (boosted-tree bin edges)",
       "run": "seed 4207, run 1",
-      "output fingerprint": "06164b3daa06",
-      "rows kept": "135633.0",
-      "cash rate, pickup zone 132": "0.238975",
-      "column-group order": NaN
+      "validation AUC": "0.6661536756",
+      "tuned threshold": "0.20",
+      "column-group order": NaN,
+      "output fingerprint": NaN
     },
     {
-      "source": "unseeded sampling (2024-01)",
+      "source": "unseeded model (boosted-tree bin edges)",
       "run": "seed 4207, run 2",
-      "output fingerprint": "06164b3daa06",
-      "rows kept": "135633.0",
-      "cash rate, pickup zone 132": "0.238975",
-      "column-group order": NaN
+      "validation AUC": "0.6661536756",
+      "tuned threshold": "0.20",
+      "column-group order": NaN,
+      "output fingerprint": NaN
     },
     {
       "source": "set ordering of feature groups",
       "run": "set() order, run 1",
-      "output fingerprint": "475c7782991d",
-      "rows kept": NaN,
-      "cash rate, pickup zone 132": NaN,
-      "column-group order": "flags | trip | zones | time"
+      "validation AUC": NaN,
+      "tuned threshold": NaN,
+      "column-group order": "trip | time | zones | flags",
+      "output fingerprint": "0c7e79e5f813"
     },
     {
       "source": "set ordering of feature groups",
       "run": "set() order, run 2",
-      "output fingerprint": "84f27db27b20",
-      "rows kept": NaN,
-      "cash rate, pickup zone 132": NaN,
-      "column-group order": "zones | trip | time | flags"
+      "validation AUC": NaN,
+      "tuned threshold": NaN,
+      "column-group order": "trip | flags | zones | time",
+      "output fingerprint": "23c2971459d2"
     },
     {
       "source": "set ordering of feature groups",
       "run": "set() order, run 3",
-      "output fingerprint": "6adb9efe0b13",
-      "rows kept": NaN,
-      "cash rate, pickup zone 132": NaN,
-      "column-group order": "trip | time | flags | zones"
+      "validation AUC": NaN,
+      "tuned threshold": NaN,
+      "column-group order": "trip | zones | flags | time",
+      "output fingerprint": "ce53eae81350"
     },
     {
       "source": "set ordering of feature groups",
       "run": "set() order, run 4",
-      "output fingerprint": "4aa696cfce2e",
-      "rows kept": NaN,
-      "cash rate, pickup zone 132": NaN,
-      "column-group order": "trip | time | zones | flags"
+      "validation AUC": NaN,
+      "tuned threshold": NaN,
+      "column-group order": "flags | zones | time | trip",
+      "output fingerprint": "f650c33d6b37"
     },
     {
       "source": "set ordering of feature groups",
       "run": "fixed GROUP_ORDER, run 1",
-      "output fingerprint": "6adb9efe0b13",
-      "rows kept": NaN,
-      "cash rate, pickup zone 132": NaN,
-      "column-group order": "trip | time | flags | zones"
+      "validation AUC": NaN,
+      "tuned threshold": NaN,
+      "column-group order": "trip | time | flags | zones",
+      "output fingerprint": "b04f9e0575fa"
     },
     {
       "source": "set ordering of feature groups",
       "run": "fixed GROUP_ORDER, run 2",
-      "output fingerprint": "6adb9efe0b13",
-      "rows kept": NaN,
-      "cash rate, pickup zone 132": NaN,
-      "column-group order": "trip | time | flags | zones"
+      "validation AUC": NaN,
+      "tuned threshold": NaN,
+      "column-group order": "trip | time | flags | zones",
+      "output fingerprint": "b04f9e0575fa"
     },
     {
       "source": "set ordering of feature groups",
       "run": "fixed GROUP_ORDER, run 3",
-      "output fingerprint": "6adb9efe0b13",
-      "rows kept": NaN,
-      "cash rate, pickup zone 132": NaN,
-      "column-group order": "trip | time | flags | zones"
+      "validation AUC": NaN,
+      "tuned threshold": NaN,
+      "column-group order": "trip | time | flags | zones",
+      "output fingerprint": "b04f9e0575fa"
     },
     {
       "source": "set ordering of feature groups",
       "run": "fixed GROUP_ORDER, run 4",
-      "output fingerprint": "6adb9efe0b13",
-      "rows kept": NaN,
-      "cash rate, pickup zone 132": NaN,
-      "column-group order": "trip | time | flags | zones"
+      "validation AUC": NaN,
+      "tuned threshold": NaN,
+      "column-group order": "trip | time | flags | zones",
+      "output fingerprint": "b04f9e0575fa"
     }
   ],
-  "notebook_minutes": 17.24291138591555
+  "notebook_minutes": 101.82369296266697
 }
